@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Pour rien oublier</title>
+    <style>
+h1 {
+    color: black;
+}
+
+button {
+	margin-left: 5px;
+	padding: 2px;
+    border: 1;
+    border-style: groove;
+    border-radius: 4px;
+	background: white;
+	font-family: inherit;
+	font-weight: 300;
+}
+
+body {
+	font: 14px 'Helvetica Neue', Helvetica, Arial, sans-serif;
+	line-height: 1.4em;
+	background: rgb(255, 210, 217);
+	color: #4d4d4d;
+	min-width: 230px;
+	max-width: 550px;
+	margin: 0 auto;
+	font-weight: 300;
+}
+    </style>
+</head>
+<body>
+
+<div id="main">
+<h1>To do list</h1>
+    <ul>
+        <li v-for="(task, index) in list">
+           <label> {{task}} </label> 
+           <button @click="deleteTask(index)">✓</button>
+        </li>
+    </ul>
+    
+    <br>
+
+    <input v-model="newTask">
+    <br>
+    <br>
+    <button @click="addTask()">Ajouter une tâche</button>
+    <br>
+    
+    
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.0.5/vue.min.js"></script>
+<script>
+var task = new Vue({
+el: '#main',
+
+// Définir les tâches initiales + permettre d'en ajouter
+data: {
+	list:['Acheter des fleurs', 'Acheter du pain', 'Signer le contrat de vente', 'Prendre rdv chez le kiné', 'Envoyer un message à Julie', 'Passer enfin mon permis', 'Charger mon téléphone'],
+    newTask:"",
+},
+
+methods: {
+    //Ajout d'une tâche
+    addTask: function(){
+        this.list.push(this.newTask);
+    },
+    //Supprimer une tâche
+    deleteTask: function(index){
+        this.list.splice(index, 1) 
+    }
+}
+});
+
+</script>
+</body>
+</html>
